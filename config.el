@@ -94,6 +94,9 @@
   (lambda () (undo-tree-mode 1)))
 (my-global-undo-tree-mode 1)
 
-;; Always display a vertical column on line 110
-(global-display-fill-column-indicator-mode 1)
-(setq-default fill-column 110)
+;; On text-mode, enable the display-fill-column-indicator-mode to show a vertical column
+;; After display-fill-column-indicator-mode is loaded set vertical column to position 110
+(add-hook 'text-mode-hook 'display-fill-column-indicator-mode)
+(after! display-fill-column-indicator
+ (setq-default fill-column 110)
+)
