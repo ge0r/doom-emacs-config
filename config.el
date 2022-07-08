@@ -75,9 +75,13 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Make key s act as vim substitute
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
+
+;; Make tabs act as they would in vim
 (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
 
+;; Set org-mode variables
 (after! org
  (custom-set-variables
    '(org-directory "~/.org-notes")
@@ -85,7 +89,11 @@
  (setq org-scheduled-past-days 0)
 )
 
+;; Enable undo-tree-mode to all buffers
 (define-globalized-minor-mode my-global-undo-tree-mode undo-tree-mode
   (lambda () (undo-tree-mode 1)))
-
 (my-global-undo-tree-mode 1)
+
+;; Always display a vertical column on line 110
+(global-display-fill-column-indicator-mode 1)
+(setq-default fill-column 110)
