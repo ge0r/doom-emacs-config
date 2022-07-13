@@ -86,7 +86,6 @@
  (custom-set-variables
    '(org-directory "~/.org-notes")
    '(org-agenda-files (list org-directory)))
- (setq org-scheduled-past-days 0)
 )
 
 ;; Enable undo-tree-mode to all buffers
