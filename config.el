@@ -99,3 +99,7 @@
 (after! display-fill-column-indicator
  (setq-default fill-column 110)
 )
+
+;; Disable clipboard
+;; Now you must use + register to paste to and from clipboard
+(setq select-enable-clipboard nil)
