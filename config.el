@@ -103,3 +103,6 @@
 ;; Disable clipboard
 ;; Now you must use + register to paste to and from clipboard
 (setq select-enable-clipboard nil)
+
+;; Disable auto-pairs (eg do not insert two quotes when only one was typed)
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
