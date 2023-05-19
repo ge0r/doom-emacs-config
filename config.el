@@ -85,7 +85,7 @@
 (after! org
  (custom-set-variables
    '(org-directory "~/.org-notes")
-   '(org-agenda-files (directory-files-recursively org-directory "\\.org$")))
+   '(org-agenda-files (list org-directory)))
 )
 
 ;; Enable undo-tree-mode to all buffers
