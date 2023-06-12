@@ -106,3 +106,5 @@
 
 ;; Disable auto-pairs (eg do not insert two quotes when only one was typed)
 ;; (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+
+(setq doom-font (font-spec :size 13))
