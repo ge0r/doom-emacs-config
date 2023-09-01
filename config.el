@@ -108,3 +108,6 @@
 ;; (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 
 (setq doom-font (font-spec :size 13))
+
+;; Send undo tree files to .emacs.d/undo dir, to keep your repo clean
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
