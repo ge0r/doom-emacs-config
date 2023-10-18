@@ -86,6 +86,10 @@
  (custom-set-variables
    '(org-directory "~/.org-notes")
    '(org-agenda-files (list org-directory)))
+   (setq org-todo-keywords '((sequence "TODO(t)" "WIP(w)" "BLOCKED(b)" "FEEDBACK(f)" "|"
+   "DONE(d)" "REJECTED(r)")))
+   (setq org-todo-keyword-faces
+     '(("WIP" . "orange") ("BLOCKED" . "red")))
 )
 
 ;; Enable undo-tree-mode to all buffers
@@ -111,3 +115,4 @@
 
 ;; Send undo tree files to .emacs.d/undo dir, to keep your repo clean
 (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+
