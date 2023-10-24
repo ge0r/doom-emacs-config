@@ -116,3 +116,5 @@
 ;; Send undo tree files to .emacs.d/undo dir, to keep your repo clean
 (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
+;; Turn off autocompletion
+(setq company-idle-delay nil)
