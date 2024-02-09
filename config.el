@@ -85,7 +85,7 @@
 (after! org
  (custom-set-variables
    '(org-directory "~/.org-notes")
-   '(org-agenda-files (list org-directory)))
+   '(org-agenda-files (directory-files-recursively org-directory "\\.org$")))
    (setq org-todo-keywords '((sequence "TODO(t)" "WIP(w)" "BLOCKED(b)" "FEEDBACK(f)" "|"
    "DONE(d)" "REJECTED(r)")))
    (setq org-todo-keyword-faces
