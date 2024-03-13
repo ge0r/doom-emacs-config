@@ -81,6 +81,10 @@
 ;; Make tabs act as they would in vim
 (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
 
+;; C-return is interpreted as C-j in no window mode
+;; With this change C-j (and C-ret in no window mode) inserts item below
+(map! :map 'override "C-j" #'+org/insert-item-below)
+
 ;; Set org-mode variables
 (after! org
  (custom-set-variables
