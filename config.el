@@ -122,3 +122,6 @@
 
 ;; Turn off autocompletion
 (setq company-idle-delay nil)
+
+;; Save recent files every 5 mins
+(run-at-time "5 min" 300 'recentf-save-list)
