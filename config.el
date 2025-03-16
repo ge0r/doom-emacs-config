@@ -125,15 +125,3 @@
 
 ;; Save recent files every 5 mins
 (run-at-time "5 min" 300 'recentf-save-list)
-
-;; Show registers at the bottom
-(use-package evil-owl
-  :config
-  (setq evil-owl-max-string-length 500)
-  (add-to-list 'display-buffer-alist
-               '("*evil-owl*"
-                 (display-buffer-in-side-window)
-                 (side . bottom)
-                 (window-height . 0.3)))
-  (evil-owl-mode))
-
