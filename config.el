@@ -120,11 +120,18 @@
 
 (setq doom-font (font-spec :size 13))
 
-;; Send undo tree files to .emacs.d/undo dir, to keep your repo clean
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+;; Send undo tree files to .config/emacs/undo dir, to keep your repo clean
+(setq undo-tree-history-directory-alist '(("." . "~/.config/emacs/undo")))
 
 ;; Turn off autocompletion
 (setq company-idle-delay nil)
 
 ;; Save recent files every 5 mins
 (run-at-time "5 min" 300 'recentf-save-list)
+
+;; Make sure that tab-width stays 4 after the changes in org version 9.7
+;; check with ctrl-h-v tab-width
+(defun my/force-tab-width-in-org ()
+  (when (derived-mode-p 'org-mode)
+    (setq tab-width 4)))
+(add-hook 'after-change-major-mode-hook #'my/force-tab-width-in-org)
