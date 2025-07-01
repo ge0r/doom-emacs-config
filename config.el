@@ -139,8 +139,12 @@
 ;; Export anki notes. Entries starting with + or - are the question
 ;; Everything under that entry is the answer
 (defun anki/export-notes-to-csv (file)
-  (interactive "FExport notes to: ")
-  (let ((regex (rx bol (in "+-") " " (group (1+ nonl))))
+  (interactive
+   (let* ((dir (file-name-directory (or buffer-file-name default-directory)))
+          (base (file-name-base (or buffer-file-name "anki-export.org")))
+          (default-path (expand-file-name (concat base ".csv") dir)))
+     (list (read-file-name "Export notes to: " dir default-path nil (concat base ".csv")))))
+  (let ((regex (rx bol (in "+-") " =" (group (+? anything)) "="))
         (buf (find-file-noselect file))
         (output ""))
     (save-excursion
@@ -160,5 +164,5 @@
       (insert output)
       (save-buffer))
     (kill-buffer buf)
-    (message "Export done.")))
+    (message "Export done to %s." file)))
 
