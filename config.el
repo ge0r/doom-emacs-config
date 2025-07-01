@@ -135,3 +135,20 @@
   (when (derived-mode-p 'org-mode)
     (setq tab-width 4)))
 (add-hook 'after-change-major-mode-hook #'my/force-tab-width-in-org)
+
+(defun anki/export-notes-to-csv (file)
+  (interactive "FExport notes to: ")
+  (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
+        (buf (find-file-noselect file))
+        (output ""))
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward regex nil t)
+        (setq output (concat output (format "%s;%s\n" (match-string 1)
+                                            (match-string 2)))))
+      (with-current-buffer buf
+        (erase-buffer)
+        (insert output)
+        (save-buffer))
+      (kill-buffer buf)
+      (message "Export done."))))
