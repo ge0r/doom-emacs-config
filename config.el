@@ -136,19 +136,29 @@
     (setq tab-width 4)))
 (add-hook 'after-change-major-mode-hook #'my/force-tab-width-in-org)
 
+;; Export anki notes. Entries starting with + or - are the question
+;; Everything under that entry is the answer
 (defun anki/export-notes-to-csv (file)
   (interactive "FExport notes to: ")
-  (let ((regex (rx bol (in "+-") " " (group (1+ nonl)) ": " (group (1+ nonl))))
+  (let ((regex (rx bol (in "+-") " " (group (1+ nonl))))
         (buf (find-file-noselect file))
         (output ""))
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward regex nil t)
-        (setq output (concat output (format "%s;%s\n" (match-string 1)
-                                            (match-string 2)))))
-      (with-current-buffer buf
-        (erase-buffer)
-        (insert output)
-        (save-buffer))
-      (kill-buffer buf)
-      (message "Export done."))))
+        (let ((question (match-string 1))
+              (answer "")
+              (start (line-end-position)))
+          (save-excursion
+            (goto-char start)
+            (while (and (forward-line 1)
+                        (looking-at "^[ \t]+\\(.*\\)$"))
+              (setq answer (concat answer " " (match-string 1)))))
+          (setq output (concat output (format "%s;%s\n" question (string-trim answer)))))))
+    (with-current-buffer buf
+      (erase-buffer)
+      (insert output)
+      (save-buffer))
+    (kill-buffer buf)
+    (message "Export done.")))
+
