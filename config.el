@@ -126,9 +126,6 @@
 ;; Turn off autocompletion
 (setq company-idle-delay nil)
 
-;; Save recent files every 5 mins
-(run-at-time "5 min" 300 'recentf-save-list)
-
 ;; Make sure that tab-width stays 4 after the changes in org version 9.7
 ;; check with ctrl-h-v tab-width
 (defun my/force-tab-width-in-org ()
