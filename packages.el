@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! undo-tree)
+(package! org-roam)

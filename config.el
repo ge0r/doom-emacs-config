@@ -164,3 +164,9 @@
     (kill-buffer buf)
     (message "Export done to %s." file)))
 
+
+;; set org-roam parameters
+(setq org-roam-directory "~/.org-notes/")
+(after! org-roam
+  (org-roam-db-autosync-mode))
+
