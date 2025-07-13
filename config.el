@@ -129,6 +129,7 @@
 ;; Make sure that tab-width stays 4 after the changes in org version 9.7
 ;; check with ctrl-h-v tab-width
 (defun my/force-tab-width-in-org ()
+  (interactive)
   (when (derived-mode-p 'org-mode)
     (setq tab-width 4)))
 (add-hook 'after-change-major-mode-hook #'my/force-tab-width-in-org)
