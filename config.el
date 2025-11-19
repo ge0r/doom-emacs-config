@@ -137,6 +137,15 @@
 (after! org
   (map! :map org-mode-map
         :i [tab] #'my/org-tab-wrapper))  ;; insert mode
+(setq warning-minimum-level :emergency)
+
+;; Suppress only the "tab width must be 8" warning from org-set-tab-width
+(advice-add 'org-set-tab-width :around
+    (lambda (orig &rest args)
+    (cl-letf (((symbol-function 'warn)
+    (lambda (&rest _args) ;; do nothing
+    nil)))
+    (apply orig args))))
 
 ;; Export anki notes. Entries starting with + or - are the question
 ;; Everything under that entry is the answer
