@@ -177,9 +177,12 @@
     (kill-buffer buf)
     (message "Export done to %s." file)))
 
-
 ;; set org-roam parameters
 (setq org-roam-directory "~/.org-notes/")
 (after! org-roam
   (org-roam-db-autosync-mode))
 
+;; use gJ and gK to move up and down in visual lines,
+;; because gj and gk is hardcoded to org-forward/backward-element
+(map! :n "gJ" #'evil-next-visual-line
+      :n "gK" #'evil-previous-visual-line)
