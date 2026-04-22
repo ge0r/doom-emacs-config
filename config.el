@@ -177,6 +177,10 @@
     (kill-buffer buf)
     (message "Export done to %s." file)))
 
+;; set greek doom font
+(setq doom-font (font-spec :family "DejaVu Sans Mono" :size 13))
+(set-fontset-font t 'greek (font-spec :family "DejaVu Sans Mono"))
+
 ;; set org-roam parameters
 (setq org-roam-directory "~/.org-notes/")
 (after! org-roam
