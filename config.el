@@ -190,3 +190,7 @@
 ;; because gj and gk is hardcoded to org-forward/backward-element
 (map! :n "gJ" #'evil-next-visual-line
       :n "gK" #'evil-previous-visual-line)
+
+;; set greek spellchecking
+(setq ispell-program-name "aspell")
+(setq ispell-dictionary "el")
