@@ -159,7 +159,11 @@
      (list (read-file-name "Export notes to: " dir default-path nil (concat base ".csv")))))
   (let ((regex (rx bol (in "+-") " =" (group (+? anything)) "="))
         (buf (find-file-noselect file))
-        (output ""))
+        ;; Tag every exported entry with the current date and time.
+        ;; Avoid spaces (Anki's tag separator) and colons (tag hierarchy).
+        (tag (format-time-string "%Y-%m-%d_%H-%M-%S"))
+        ;; Tell Anki the field separator and which column holds the tags.
+        (output "#separator:;\n#tags column:3\n"))
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward regex nil t)
@@ -171,7 +175,7 @@
             (while (and (forward-line 1)
                         (looking-at "^[ \t]+\\(.*\\)$"))
               (setq answer (concat answer " " (match-string 1)))))
-          (setq output (concat output (format "%s;%s\n" question (string-trim answer)))))))
+          (setq output (concat output (format "%s;%s;%s\n" question (string-trim answer) tag))))))
     (with-current-buffer buf
       (erase-buffer)
       (insert output)
